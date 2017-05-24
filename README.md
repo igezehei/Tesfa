@@ -1,6 +1,6 @@
 Project Tesfa is a collection of personal projects listed below:
 
-Fault Tolerance Injection Framework:  This project will use the Chaos Monkey and create faults to  measure the fragility of web applications. 
+Fault Tolerance Framework:  This project will use the Chaos Monkey and measure the fragility of web applications. 
 
 Locate the HandyMan: This platform enables homeowners to find fast and efficient services whenever they need a Handy Man or a Contractor.
 
