@@ -1,7 +1,30 @@
-Project Tesfa is a collection of personal projects listed below:
+# Project Tesfa
 
-Fault Tolerance Framework:  This project will use the Chaos Monkey and measure the fragility of web applications. 
+## Overview
+Project Tesfa is a collection of personal projects, now enhanced with a Spring Boot backend and React frontend for modern web application development.
 
-Locate the HandyMan: This platform enables homeowners to find fast and efficient services whenever they need a Handy Man or a Contractor.
+### Components
+1. **Fault Tolerance Framework**
+   - Backend: Spring Boot
+   - Frontend: React
+   - Goal: Inject controlled failures using Chaos Monkey-like tooling and measure how web applications react.
 
-Payment on the Go: This project will add pre-ordering and pre-payment option for existing food truck tracking web application and apps.
+2. **Locate the HandyMan**
+   - Backend: Spring Boot
+   - Frontend: React
+   - Goal: Match homeowners with available handymen/contractors.
+
+3. **Payment on the Go**
+   - Backend: Spring Boot
+   - Frontend: React
+   - Goal: Enable food truck customers to pre-order and pre-pay.
+
+### Directory Structure
+- `backend/`: Contains the Spring Boot backend.
+- `frontend/`: Contains the React frontend.
+- `WebContent/`: Legacy assets and static files.
+
+### Setup Instructions
+1. Navigate to the `backend/` directory and run the Spring Boot application.
+2. Navigate to the `frontend/` directory, install dependencies, and start the React development server.
+3. Access the application via the React frontend, which communicates with the Spring Boot backend.
