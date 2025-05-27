@@ -1,0 +1,31 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+' Level 1: Context Diagram
+LAYOUT_TOP_DOWN()
+Person(user, "User", "Interacts with the system")
+System(tesfaSystem, "Tesfa System", "Web application")
+SystemDb(database, "Database", "Stores and retrieves data")
+
+Rel(user, tesfaSystem, "Uses")
+Rel(tesfaSystem, database, "Reads/Writes")
+
+@enduml
+
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+' Level 2: Container Diagram
+LAYOUT_TOP_DOWN()
+Person(user, "User", "Interacts with the system")
+System_Boundary(tesfaSystem, "Tesfa System") {
+    Container(frontend, "Frontend", "React Application", "Handles user interaction")
+    Container(backend, "Backend", "Java Application", "Handles business logic")
+    ContainerDb(database, "Database", "Relational Database", "Stores persistent data")
+}
+
+Rel(user, frontend, "Uses")
+Rel(frontend, backend, "Sends requests")
+Rel(backend, database, "Reads/Writes")
+
+@enduml

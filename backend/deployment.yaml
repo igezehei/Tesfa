@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: gcr.io/<PROJECT_ID>/backend:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql:///<CLOUD_SQL_CONNECTION_NAME>"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "<DB_USERNAME>"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "<DB_PASSWORD>"
