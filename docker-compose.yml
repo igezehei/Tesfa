@@ -3,20 +3,30 @@ version: '3.8'
 services:
   postgres:
     image: postgres:latest
-    container_name: pg-docker
+    container_name: my_database
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: crm_db
+      POSTGRES_USER: your_username
+      POSTGRES_PASSWORD: your_password
+      POSTGRES_DB: your_database
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     networks:
-      - backend_network
+      - my_network
 
-volumes:
-  postgres_data:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8080:8080"
+    networks:
+      - my_network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://my_database:5432/your_database
+      SPRING_DATASOURCE_USERNAME: your_username
+      SPRING_DATASOURCE_PASSWORD: your_password
 
 networks:
-  backend_network:
+  my_network:
+    driver: bridge
