@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Navigate to the backend directory
+cd backend
+
 # Check if Docker is running
 if ! docker info > /dev/null 2>&1; then
   echo "Docker is not running. Please start Docker and try again."
@@ -38,6 +41,21 @@ fi
 # Start the backend service
 if ! mvn spring-boot:run; then
   echo "Failed to start the backend service. Check the logs for details."
+  exit 1
+fi
+
+# Navigate to the frontend directory
+cd ../frontend
+
+# Install dependencies
+if ! npm install; then
+  echo "Failed to install frontend dependencies. Check the logs for details."
+  exit 1
+fi
+
+# Start the frontend service
+if ! npm start; then
+  echo "Failed to start the frontend service. Check the logs for details."
   exit 1
 fi
 

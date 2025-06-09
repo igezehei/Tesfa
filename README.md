@@ -1,30 +1,60 @@
 # Project Tesfa
 
 ## Overview
-Project Tesfa is a collection of personal projects, now enhanced with a Spring Boot backend and React frontend for modern web application development.
+Project Tesfa is a full-stack application consisting of a Spring Boot backend and a React frontend. It is designed to provide a seamless user experience and robust backend functionality.
 
-### Components
-1. **Fault Tolerance Framework**
-   - Backend: Spring Boot
-   - Frontend: React
-   - Goal: Inject controlled failures using Chaos Monkey-like tooling and measure how web applications react.
+## Backend
+The backend is built using Spring Boot and connects to a PostgreSQL database. It includes:
+- RESTful APIs for data interaction.
+- Dockerized setup for easy deployment.
+- Database seed scripts for initial data population.
 
-2. **Locate the HandyMan**
-   - Backend: Spring Boot
-   - Frontend: React
-   - Goal: Match homeowners with available handymen/contractors.
+### How to Run the Backend
+1. Navigate to the `backend` directory:
+   ```bash
+   cd backend
+   ```
+2. Start the application using Maven:
+   ```bash
+   mvn spring-boot:run
+   ```
+3. Alternatively, use the `startup.sh` script to start the application and check database connectivity:
+   ```bash
+   ./startup.sh
+   ```
 
-3. **Payment on the Go**
-   - Backend: Spring Boot
-   - Frontend: React
-   - Goal: Enable food truck customers to pre-order and pre-pay.
+## Frontend
+The frontend is built using React and TypeScript. It includes:
+- A modular component structure.
+- Integration with the backend APIs.
 
-### Directory Structure
-- `backend/`: Contains the Spring Boot backend.
-- `frontend/`: Contains the React frontend.
-- `WebContent/`: Legacy assets and static files.
+### How to Run the Frontend
+1. Navigate to the `frontend` directory:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-### Setup Instructions
-1. Navigate to the `backend/` directory and run the Spring Boot application.
-2. Navigate to the `frontend/` directory, install dependencies, and start the React development server.
-3. Access the application via the React frontend, which communicates with the Spring Boot backend.
+## Docker Setup
+The application is fully dockerized for easy deployment. Use the `docker-compose.yml` file to start both the backend and the PostgreSQL database.
+
+### How to Run with Docker
+1. Ensure Docker is installed and running.
+2. Start the services:
+   ```bash
+   docker-compose up
+   ```
+
+## Additional Information
+- The backend uses a PostgreSQL database. Ensure the database is running and accessible.
+- The frontend connects to the backend APIs hosted on `http://localhost:8080`.
+
+## License
+This project is licensed under the MIT License.
