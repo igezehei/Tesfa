@@ -14,7 +14,7 @@ public class MCPController {
     }
 
     @PostMapping("/query")
-    public String queryLLM(@RequestBody String prompt) {
-        return llmAdapterService.queryLLM(prompt);
+    public String queryLLM(@RequestParam String provider, @RequestBody String prompt) {
+        return llmAdapterService.queryLLM(prompt, provider);
     }
 }

@@ -12,8 +12,21 @@ public class LLMAdapterService {
         this.restTemplate = new RestTemplate();
     }
 
-    public String queryLLM(String prompt) {
-        String llmEndpoint = "https://api.llmprovider.com/query"; // Replace with actual LLM endpoint
+    public String queryLLM(String prompt, String provider) {
+        String llmEndpoint;
+        switch (provider.toLowerCase()) {
+            case "openai":
+                llmEndpoint = "https://api.openai.com/v1/query";
+                break;
+            case "anthropic":
+                llmEndpoint = "https://api.anthropic.com/v1/query";
+                break;
+            case "drafahan":
+                llmEndpoint = "https://api.drafahan.com/v1/query";
+                break;
+            default:
+                llmEndpoint = "https://api.llmprovider.com/query";
+        }
         String response = restTemplate.postForObject(llmEndpoint, prompt, String.class);
         return response;
     }

@@ -9,6 +9,16 @@ if command -v docker-compose &> /dev/null; then
   docker-compose up -d || echo "Docker Compose not configured or failed. Continuing..."
 fi
 
+# Enable Spring Boot Actuator for observability
+if ! grep -q 'spring-boot-starter-actuator' ../backend/pom.xml; then
+  echo 'Adding Spring Boot Actuator to backend pom.xml...'
+  sed -i '' '/<dependencies>/a\
+        <dependency>\
+            <groupId>org.springframework.boot</groupId>\
+            <artifactId>spring-boot-starter-actuator</artifactId>\
+        </dependency>' ../backend/pom.xml
+fi
+
 # Start backend
 if command -v mvn &> /dev/null; then
   echo "Starting Spring Boot backend..."

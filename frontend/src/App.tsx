@@ -1,30 +1,47 @@
 import { ApolloClient, InMemoryCache, ApolloProvider, gql, useLazyQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const client = new ApolloClient({
   uri: '/graphql',
   cache: new InMemoryCache(),
 });
 
-const QUERY_LLM = gql`
-  query QueryLLM($prompt: String!) {
-    queryLLM(prompt: $prompt)
-  }
-`;
+function useLogger(name: string, value: any) {
+  useEffect(() => {
+    console.log(`[${name}]`, value);
+  }, [name, value]);
+}
 
 function LLMQueryComponent() {
   const [prompt, setPrompt] = useState('');
-  const [queryLLM, { data, loading, error }] = useLazyQuery(QUERY_LLM);
+  const [provider, setProvider] = useState('openai');
+  const [queryLLM, { data, loading, error }] = useLazyQuery(gql`
+    query QueryLLM($prompt: String!, $provider: String!) {
+      queryLLM(prompt: $prompt, provider: $provider)
+    }
+  `);
+
+  useLogger('Prompt', prompt);
+  useLogger('Provider', provider);
+  useLogger('Data', data);
+  useLogger('Error', error);
+  useLogger('Loading', loading);
 
   return (
     <div>
       <h2>Query LLM via GraphQL</h2>
+      <select value={provider} onChange={e => setProvider(e.target.value)}>
+        <option value="openai">OpenAI</option>
+        <option value="anthropic">Anthropic</option>
+        <option value="drafahan">Drafahan</option>
+        <option value="default">Default</option>
+      </select>
       <input
         value={prompt}
         onChange={e => setPrompt(e.target.value)}
         placeholder="Enter prompt"
       />
-      <button onClick={() => queryLLM({ variables: { prompt } })} disabled={loading}>
+      <button onClick={() => queryLLM({ variables: { prompt, provider } })} disabled={loading}>
         Query
       </button>
       {loading && <p>Loading...</p>}
