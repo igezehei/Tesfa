@@ -1,3 +1,11 @@
+type Agent {
+    id: ID!
+    name: String!
+    description: String
+    avatarUrl: String
+}
+
 type Query {
-    queryLLM(prompt: String!): String
+    queryLLM(prompt: String!, provider: String!): String
+    agents: [Agent!]!
 }

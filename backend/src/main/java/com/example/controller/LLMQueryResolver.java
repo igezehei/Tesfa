@@ -12,7 +12,7 @@ public class LLMQueryResolver implements GraphQLQueryResolver {
         this.llmAdapterService = llmAdapterService;
     }
 
-    public String queryLLM(String prompt) {
-        return llmAdapterService.queryLLM(prompt);
+    public String queryLLM(String prompt, String provider) {
+        return llmAdapterService.queryLLM(prompt, provider);
     }
 }
