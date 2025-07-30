@@ -4,10 +4,23 @@
 Project Tesfa is a full-stack application consisting of a Spring Boot backend and a React frontend. It is designed to provide a seamless user experience and robust backend functionality.
 
 ## Backend
+
 The backend is built using Spring Boot and connects to a PostgreSQL database. It includes:
 - RESTful APIs for data interaction.
 - Dockerized setup for easy deployment.
 - Database seed scripts for initial data population.
+
+### API Example
+
+**Test Database Connection**
+
+```
+GET /test-db
+Response: 200 OK
+Database connection successful!
+```
+
+More API endpoints can be documented here as the project grows.
 
 ### How to Run the Backend
 1. Navigate to the `backend` directory:
@@ -55,6 +68,10 @@ The application is fully dockerized for easy deployment. Use the `docker-compose
 ## Additional Information
 - The backend uses a PostgreSQL database. Ensure the database is running and accessible.
 - The frontend connects to the backend APIs hosted on `http://localhost:8080`.
+
+## Architecture
+
+See `C4Model.md` for detailed architecture diagrams, including context, container, and component diagrams.
 
 ## License
 This project is licensed under the MIT License.

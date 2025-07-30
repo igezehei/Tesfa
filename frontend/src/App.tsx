@@ -67,6 +67,7 @@ function LLMChatComponent() {
           label="LLM Provider"
           onChange={e => setProvider(e.target.value)}
           sx={{ bgcolor: '#252526', color: '#fff' }}
+          inputProps={{ 'aria-label': 'Select LLM Provider' }}
         >
           <MenuItem value="openai">ChatGPT (OpenAI)</MenuItem>
           <MenuItem value="anthropic">Claude (Anthropic)</MenuItem>
@@ -74,12 +75,12 @@ function LLMChatComponent() {
           <MenuItem value="default">Default</MenuItem>
         </Select>
       </FormControl>
-      <Box sx={{ maxHeight: 300, overflowY: 'auto', mb: 2, bgcolor: '#181818', p: 2, borderRadius: 2 }}>
+      <Box sx={{ maxHeight: 300, overflowY: 'auto', mb: 2, bgcolor: '#181818', p: 2, borderRadius: 2 }} aria-live="polite">
         {messages.map((msg, idx) => (
           <ChatMessage {...msg} key={idx} />
         ))}
-        {loading && <CircularProgress sx={{ color: '#61dafb', mb: 2 }} />}
-        {error && <Typography color="error">Error: {error.message}</Typography>}
+        {loading && <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><CircularProgress sx={{ color: '#61dafb', mb: 2 }} size={20} /><Typography variant="caption" sx={{ color: '#61dafb' }}>Loading...</Typography></Box>}
+        {error && <Typography color="error" role="alert">Error: {error.message}</Typography>}
       </Box>
       <Box sx={{ display: 'flex', gap: 2 }}>
         <TextField
@@ -90,14 +91,16 @@ function LLMChatComponent() {
           onChange={e => setPrompt(e.target.value)}
           sx={{ bgcolor: '#252526', input: { color: '#fff' }, label: { color: '#fff' } }}
           onKeyDown={e => { if (e.key === 'Enter') handleSend(); }}
+          inputProps={{ 'aria-label': 'Type your message' }}
         />
         <Button
           variant="contained"
           color="primary"
           onClick={handleSend}
           disabled={loading || !prompt.trim()}
+          aria-label="Send message"
         >
-          Send
+          {loading ? <CircularProgress size={18} sx={{ color: '#fff' }} /> : 'Send'}
         </Button>
       </Box>
     </Box>
