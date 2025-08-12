@@ -3,9 +3,13 @@ type Agent {
     name: String!
     description: String
     avatarUrl: String
+    context: String
+    capabilities: [String!]
 }
 
 type Query {
-    queryLLM(prompt: String!, provider: String!): String
+    queryLLM(prompt: String!, provider: String!, options: JSON): String
     agents: [Agent!]!
 }
+
+scalar JSON
