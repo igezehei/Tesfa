@@ -13,3 +13,19 @@ type Query {
 }
 
 scalar JSON
+
+type CallRecord {
+    id: ID
+    timestamp: Long
+    provider: String
+    promptHash: String
+    options: JSON
+    responseSnippet: String
+    durationMs: Long
+    status: String
+    error: String
+}
+
+extend type Query {
+    recentCalls(limit: Int = 50): [CallRecord!]!
+}

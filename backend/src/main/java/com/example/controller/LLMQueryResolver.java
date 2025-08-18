@@ -8,6 +8,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.util.Map;
+import java.util.HashMap;
 
 @Component
 public class LLMQueryResolver implements GraphQLQueryResolver {
@@ -26,7 +27,7 @@ public class LLMQueryResolver implements GraphQLQueryResolver {
      */
     public String queryLLM(String prompt, String provider) {
         // Future: Add support for provider-specific options, streaming, or agentic context.
-        return llmAdapterService.queryLLM(prompt, provider);
+    return llmAdapterService.queryLLM(prompt, provider, new HashMap<>());
     }
 
     /**
