@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache, ApolloProvider, gql, useLazyQuery } from '@apollo/client';
 import React, { useState, useEffect } from 'react';
 import { Select, MenuItem, InputLabel, FormControl, Box, Typography, Button, TextField, CircularProgress } from '@mui/material';
+import CallLogsPanel from './CallLogsPanel';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -108,7 +109,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <LLMChatComponent />
+  <LLMChatComponent />
+  <CallLogsPanel />
       </div>
     </ApolloProvider>
   );
