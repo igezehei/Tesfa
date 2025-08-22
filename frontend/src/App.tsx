@@ -2,6 +2,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, gql, useLazyQuery } from '
 import React, { useState, useEffect } from 'react';
 import { Select, MenuItem, InputLabel, FormControl, Box, Typography, Button, TextField, CircularProgress } from '@mui/material';
 import CallLogsPanel from './CallLogsPanel';
+import SmartCompose from './SmartCompose';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -83,7 +84,8 @@ function LLMChatComponent() {
         {error && <Typography color="error">Error: {error.message}</Typography>}
       </Box>
       <Box sx={{ display: 'flex', gap: 2 }}>
-        <TextField
+        <Box sx={{ flex: 1 }}>
+          <TextField
           fullWidth
           variant="filled"
           label="Type your message..."
@@ -92,6 +94,8 @@ function LLMChatComponent() {
           sx={{ bgcolor: '#252526', input: { color: '#fff' }, label: { color: '#fff' } }}
           onKeyDown={e => { if (e.key === 'Enter') handleSend(); }}
         />
+          <SmartCompose value={prompt} provider={provider} onPick={(s) => setPrompt(p => (p + ' ' + s).trim())} />
+        </Box>
         <Button
           variant="contained"
           color="primary"
