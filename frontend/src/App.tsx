@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Select, MenuItem, InputLabel, FormControl, Box, Typography, Button, TextField, CircularProgress } from '@mui/material';
 import CallLogsPanel from './CallLogsPanel';
 import ContactFooter from './ContactFooter';
+import ALMPanel from './ALMPanel';
 import SmartCompose from './SmartCompose';
 
 const client = new ApolloClient({
@@ -116,6 +117,7 @@ function App() {
       <div className="App">
   <LLMChatComponent />
   <CallLogsPanel />
+  <ALMPanel />
   <ContactFooter />
       </div>
     </ApolloProvider>
