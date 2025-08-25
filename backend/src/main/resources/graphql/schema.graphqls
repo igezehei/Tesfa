@@ -29,3 +29,36 @@ type CallRecord {
 extend type Query {
     recentCalls(limit: Int = 50): [CallRecord!]!
 }
+
+"""
+AI enrichment types for listing previews. Provides suggested title/description, a quality score,
+category suggestions, generated image alt texts, aspect suggestions and moderation flags.
+These are produced by the server-side AI pipeline and are safe to present in the UI.
+"""
+type AIEnrichment {
+    titleSuggestion: String
+    descriptionSuggestion: String
+    qualityScore: Float
+    categorySuggestion: String
+    aspectSuggestions: [String!]
+    imageAltTexts: [String!]
+    moderationFlags: [String!]
+    generatedAt: Long
+    model: String
+}
+
+type EnrichmentEntry {
+    requestedId: ID
+    listingPreviewId: ID
+    enrichment: AIEnrichment
+}
+
+type EnrichmentReport {
+    taskId: ID!
+    entries: [EnrichmentEntry!]!
+}
+
+extend type Query {
+    "Request AI enrichments for a listing previews creation task (non-destructive)."
+    enrichListingPreviews(taskId: ID!): EnrichmentReport
+}
