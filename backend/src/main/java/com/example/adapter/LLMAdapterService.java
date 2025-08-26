@@ -2,6 +2,7 @@ package com.example.adapter;
 
 import com.example.logging.CallLoggerService;
 import com.example.logging.CallRecord;
+import org.slf4j.MDC;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,14 @@ public class LLMAdapterService {
     public String queryLLM(String prompt, String provider, Map<String, Object> options) {
         long start = System.currentTimeMillis();
         CallRecord rec = new CallRecord();
+        // attach trace id from the request MDC if available so we can correlate logs/calls
+        try {
+            String trace = MDC.get("traceId");
+            if (trace != null) {
+                rec.setId(trace);
+            }
+        } catch (Exception ignored) {
+        }
         rec.setTimestamp(start);
         rec.setProvider(provider);
         rec.setPromptHash(Integer.toHexString(prompt != null ? prompt.hashCode() : 0));

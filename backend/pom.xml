@@ -8,10 +8,10 @@
     <description>Spring Boot backend for Project Tesfa</description>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.example</groupId>
+        <artifactId>tesfa-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>parent-pom.xml</relativePath>
     </parent>
 
     <dependencies>
