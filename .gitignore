@@ -78,3 +78,4 @@ frontend/src/**/*.map
 .env
 .env.local
 .env.*.local
+backend/maven-truststore.jks
