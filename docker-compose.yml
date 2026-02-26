@@ -27,6 +27,16 @@ services:
       SPRING_DATASOURCE_USERNAME: your_username
       SPRING_DATASOURCE_PASSWORD: your_password
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network
+
 networks:
   my_network:
     driver: bridge

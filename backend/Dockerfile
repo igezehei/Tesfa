@@ -1,14 +1,22 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-slim
+# --- build stage: compile with Maven ---
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
-# Set the working directory in the container
+# set workdir and copy sources
+WORKDIR /app
+COPY pom.xml ./
+COPY src ./src
+
+# build the application (skip tests for speed)
+RUN mvn clean package -DskipTests
+
+# --- runtime stage ---
+FROM eclipse-temurin:21-jdk
 WORKDIR /app
 
-# Copy the backend JAR file into the container
-COPY target/*.jar app.jar
+# copy jar from build stage
+COPY --from=build /app/target/*.jar app.jar
 
-# Expose the port the backend runs on
+# service port
 EXPOSE 8080
 
-# Run the backend application
 ENTRYPOINT ["java", "-jar", "app.jar"]
